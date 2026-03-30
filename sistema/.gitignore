@@ -1,0 +1,52 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+bin/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- Django ---
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+# Se preferir gerenciar estáticos estáticos em produção, ignore:
+# staticfiles/
+
+# --- Configurações / Variáveis de Ambiente ---
+.env
+.env.local
+.env.*.local
+.secrets
+
+# --- IDEs e Editores ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# --- SO ---
+.DS_Store
+Thumbs.db
