@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedidos - Forno e Afeto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2>Forno e Afeto</h2>
+
+        <nav>
+            <a href="index.html" class="active">Pedidos</a>
+            <a href="clientes.html">Clientes</a>
+            <a href="financeiro.html">Financeiro</a>
+        </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="content">
+
+        <!-- FORM -->
+        <section class="card">
+            <h3>Novo Pedido</h3>
+
+            <div class="form">
+                <input type="text" placeholder="Nome do Cliente">
+                <input type="text" placeholder="Produto">
+                <input type="text" placeholder="Valor">
+                <button>Adicionar</button>
+            </div>
+        </section>
+
+        <!-- TABELA -->
+        <section class="card">
+            <h3>Pedidos</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Produto</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Maria</td>
+                        <td>Bolo de Chocolate</td>
+                        <td>R$ 50,00</td>
+                        <td><span class="status pending">Pendente</span></td>
+                        <td>✏️ 🗑️</td>
+                    </tr>
+
+                    <tr>
+                        <td>João</td>
+                        <td>Torta de Morango</td>
+                        <td>R$ 75,00</td>
+                        <td><span class="status done">Entregue</span></td>
+                        <td>✏️ 🗑️</td>
+                    </tr>
+
+                    <tr>
+                        <td>Ana</td>
+                        <td>Cupcakes</td>
+                        <td>R$ 36,00</td>
+                        <td><span class="status pending">Pendente</span></td>
+                        <td>✏️ 🗑️</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+</div>
+
+</body>
+</html>
