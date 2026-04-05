@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sistema{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 24px;
+            line-height: 1.5;
+        }
+        nav {
+            margin-bottom: 24px;
+        }
+        nav a {
+            margin-right: 12px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'home' %}">Início</a>
+        <a href="{% url 'clientes:home' %}">Clientes</a>
+        <a href="{% url 'produtos:home' %}">Produtos</a>
+        <a href="{% url 'pedidos:home' %}">Pedidos</a>
+        <a href="{% url 'financeiro:home' %}">Financeiro</a>
+    </nav>
+
+    {% block content %}{% endblock %}
+</body>
+</html>

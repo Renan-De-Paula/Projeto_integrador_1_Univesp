@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def home(request):
+    return render(request, 'clientes/home.html') # todo: verificar outra forma de retornar a pagina 
