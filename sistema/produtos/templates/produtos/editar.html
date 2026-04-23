@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Produto{% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <h3>Editar Produto — {{ produto.nome }}</h3>
+
+    <form method="POST" class="form">
+        {% csrf_token %}
+        <input type="text" name="nome" value="{{ produto.nome }}" placeholder="Nome" required>
+        <input type="text" name="recheio" value="{{ produto.recheio }}" placeholder="Recheio">
+        <select name="categoria" required>
+            <option value="">Categoria</option>
+            {% for val, label in produto.CATEGORIAS %}
+            <option value="{{ val }}" {% if produto.categoria == val %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+        <input type="number" step="0.01" name="preco" value="{{ produto.preco }}" placeholder="Preço/KG" required>
+        <button type="submit">Salvar</button>
+        <a href="{% url 'produtos:home' %}" class="btn-sm btn-warning" style="padding:10px 16px;">Cancelar</a>
+    </form>
+</div>
+
+{% endblock %}

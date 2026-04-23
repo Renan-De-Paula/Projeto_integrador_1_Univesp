@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block title %}Pedidos{% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <h3>Novo Pedido</h3>
+
+    <form method="POST" class="form">
+        {% csrf_token %}
+
+        <!-- Select de Cliente -->
+        <select name="cliente_id" required>
+            <option value="">Selecione o cliente</option>
+            {% for cliente in clientes %}
+            <option value="{{ cliente.pk }}">{{ cliente.nome }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- Select de Produto com data-preco para cálculo automático -->
+        <select name="produto_id" id="produto" required>
+            <option value="">Selecione o produto</option>
+            {% for produto in produtos %}
+            <option value="{{ produto.pk }}" data-preco="{{ produto.preco }}">
+                {{ produto.nome }} — R$ {{ produto.preco }}/kg
+            </option>
+            {% endfor %}
+        </select>
+
+        <!-- Quantidade em KG -->
+        <input
+            type="number"
+            step="0.1"
+            min="0.1"
+            id="kg"
+            name="kg"
+            placeholder="Quantidade (KG)"
+            required
+        >
+
+        <!-- Valor calculado automaticamente (somente leitura) -->
+        <input
+            type="text"
+            id="valor_display"
+            placeholder="Valor total (calculado)"
+            readonly
+            style="background:#f5f5f5; cursor:not-allowed;"
+        >
+
+        <button type="submit">Adicionar Pedido</button>
+    </form>
+</div>
+
+<div class="card">
+    <h3>Pedidos</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Cliente</th>
+                <th>Produto</th>
+                <th>KG</th>
+                <th>Valor</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidos %}
+            <tr>
+                <td>{{ pedido.pk }}</td>
+                <td>{{ pedido.cliente.nome }}</td>
+                <td>{{ pedido.produto.nome }}</td>
+                <td>{{ pedido.kg }} kg</td>
+                <td>R$ {{ pedido.valor }}</td>
+                <td>
+                    {% if pedido.status == 'Pendente' %}
+                        <span class="status pending">Pendente</span>
+                    {% elif pedido.status == 'Entregue' %}
+                        <span class="status done">Entregue</span>
+                    {% else %}
+                        <span class="status cancel">Cancelado</span>
+                    {% endif %}
+                </td>
+                <td class="actions">
+                    <a href="{% url 'pedidos:alterar_status' pedido.pk %}"
+                       class="btn-sm btn-success">
+                        {% if pedido.status == 'Pendente' %}✅ Entregar{% else %}↩️ Reverter{% endif %}
+                    </a>
+                    <a href="{% url 'pedidos:excluir' pedido.pk %}"
+                       class="btn-sm btn-danger"
+                       onclick="return confirm('Excluir pedido #{{ pedido.pk }}?')">🗑️</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" style="text-align:center; color:#999;">Nenhum pedido cadastrado ainda.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Script de cálculo automático do valor -->
+<script>
+    const produtoSelect = document.getElementById('produto');
+    const kgInput       = document.getElementById('kg');
+    const valorDisplay  = document.getElementById('valor_display');
+
+    function calcularValor() {
+        const option = produtoSelect.options[produtoSelect.selectedIndex];
+        const preco  = parseFloat(option.getAttribute('data-preco'));
+        const kg     = parseFloat(kgInput.value);
+
+        if (!isNaN(preco) && !isNaN(kg) && kg > 0) {
+            valorDisplay.value = 'R$ ' + (preco * kg).toFixed(2);
+        } else {
+            valorDisplay.value = '';
+        }
+    }
+
+    produtoSelect.addEventListener('change', calcularValor);
+    kgInput.addEventListener('input', calcularValor);
+</script>
+
+{% endblock %}

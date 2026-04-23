@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Produtos{% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <h3>Novo Produto</h3>
+
+    <form method="POST" class="form">
+        {% csrf_token %}
+        <input type="text" name="nome" placeholder="Nome do produto" required>
+        <input type="text" name="recheio" placeholder="Recheio (ex: chocolate, morango)">
+        <select name="categoria" required>
+            <option value="">Categoria</option>
+            <option value="Bolo">Bolo</option>
+            <option value="Doce">Doce</option>
+            <option value="Torta">Torta</option>
+            <option value="Cupcake">Cupcake</option>
+            <option value="Outro">Outro</option>
+        </select>
+        <input type="number" step="0.01" min="0.01" name="preco" placeholder="Preço por KG (ex: 50.00)" required>
+        <small>Informe o valor por KG</small>
+        <button type="submit">Adicionar</button>
+    </form>
+</div>
+
+<div class="card">
+    <h3>Produtos Cadastrados</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Recheio</th>
+                <th>Categoria</th>
+                <th>Preço/KG</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for produto in produtos %}
+            <tr>
+                <td>{{ produto.pk }}</td>
+                <td>{{ produto.nome }}</td>
+                <td>{{ produto.recheio|default:"—" }}</td>
+                <td>{{ produto.categoria }}</td>
+                <td>R$ {{ produto.preco }}</td>
+                <td class="actions">
+                    <a href="{% url 'produtos:editar' produto.pk %}" class="btn-sm btn-warning">✏️ Editar</a>
+                    <a href="{% url 'produtos:excluir' produto.pk %}"
+                       class="btn-sm btn-danger"
+                       onclick="return confirm('Excluir {{ produto.nome }}?')">🗑️ Excluir</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" style="text-align:center; color:#999;">Nenhum produto cadastrado ainda.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
