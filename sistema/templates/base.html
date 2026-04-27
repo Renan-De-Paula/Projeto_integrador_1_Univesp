@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Forno e Afeto{% endblock %} - Forno e Afeto</title>
+    {% load static %}
+    <!-- CORREÇÃO: o arquivo fica em static/css/style.css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <aside class="sidebar">
+        <h2>Forno&nbsp;&amp;&nbsp;Afeto</h2>
+        <nav>
+            <a href="{% url 'pedidos:home' %}"    {% if request.resolver_match.app_name == 'pedidos'    %}class="active"{% endif %}>🛒 Pedidos</a>
+            <a href="{% url 'clientes:home' %}"   {% if request.resolver_match.app_name == 'clientes'   %}class="active"{% endif %}>👤 Clientes</a>
+            <a href="{% url 'produtos:home' %}"   {% if request.resolver_match.app_name == 'produtos'   %}class="active"{% endif %}>🍰 Produtos</a>
+            <a href="{% url 'financeiro:home' %}" {% if request.resolver_match.app_name == 'financeiro' %}class="active"{% endif %}>💰 Financeiro</a>
+        </nav>
+    </aside>
+
+    <main class="content">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+</div>
+
+</body>
+</html>

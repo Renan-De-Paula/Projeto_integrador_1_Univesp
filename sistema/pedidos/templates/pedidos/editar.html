@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Pedido{% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <h3>Editar Pedido #{{ pedido.pk }}</h3>
+
+    <form method="POST" class="form">
+        {% csrf_token %}
+        <input type="text"  name="cliente"  value="{{ pedido.cliente }}"  placeholder="Nome do Cliente" required>
+        <input type="text"  name="produto"  value="{{ pedido.produto }}"  placeholder="Produto"         required>
+        <input type="text"  name="valor"    value="{{ pedido.valor }}"    placeholder="Valor"           required>
+        <select name="status">
+            <option value="pendente" {% if pedido.status == 'pendente' %}selected{% endif %}>Pendente</option>
+            <option value="entregue" {% if pedido.status == 'entregue' %}selected{% endif %}>Entregue</option>
+        </select>
+        <button type="submit">Salvar</button>
+        <a href="{% url 'pedidos:home' %}" class="btn-sm btn-warning" style="padding:10px 16px;">Cancelar</a>
+    </form>
+</div>
+
+{% endblock %}

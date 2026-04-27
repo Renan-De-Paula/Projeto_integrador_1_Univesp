@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Clientes{% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <h3>Novo Cliente</h3>
+
+    <form method="POST" class="form">
+        {% csrf_token %}
+        <input type="text"  name="nome"     placeholder="Nome completo"              required>
+        <input type="text"  name="telefone" placeholder="Telefone (ex: (11) 99999-9999)" required>
+        <input type="email" name="email"    placeholder="E-mail"                     required>
+        <button type="submit">Adicionar</button>
+    </form>
+</div>
+
+<div class="card">
+    <h3>Clientes Cadastrados</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>E-mail</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+            <tr>
+                <td>{{ cliente.pk }}</td>
+                <td>{{ cliente.nome }}</td>
+                <td>{{ cliente.telefone }}</td>
+                <td>{{ cliente.email }}</td>
+                <td class="actions">
+                    <a href="{% url 'clientes:editar' cliente.pk %}" class="btn-sm btn-warning">✏️ Editar</a>
+                    <a href="{% url 'clientes:excluir' cliente.pk %}"
+                       class="btn-sm btn-danger"
+                       onclick="return confirm('Excluir {{ cliente.nome }}?')">🗑️ Excluir</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="text-align:center; color:#999;">Nenhum cliente cadastrado ainda.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

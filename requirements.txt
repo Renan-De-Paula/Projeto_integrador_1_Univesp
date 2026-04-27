@@ -1,0 +1,5 @@
+django>=4.2,<5.0
+sqlparse>=0.4.4
+asgiref>=3.7.2
+waitress>=2.1.2
+tzdata>=2023.3
