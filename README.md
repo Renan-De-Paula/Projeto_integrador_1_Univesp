@@ -30,26 +30,25 @@ Projeto desenvolvido como parte do **Projeto Integrador da UNIVESP**.
 
 ---
 
-📸 Demonstração do Sistema
-<br>
+<h2 align="center">📸 Demonstração do Sistema</h2><br>
 <p align="center">
-🧾 Pedidos
+  <h3>🧾 Pedidos</h3><br>
   <img src="imagens/fornoAfetoPedidos.png" width="800">
-</p>
-<br>
+</p><br>
 <p align="center">
-👥 Clientes
+<h3>👥 Clientes</h3><br>
   <img src="imagens/fornoAfetoClientes.png" width="800">
-</p>
-
+</p><br>
 <p align="center">
-🛒 Produtos
+  <h3>🛒 Produtos</h3><br>
   <img src="imagens/fornoAfetoProdutos.png" width="800">
 </p>
+<br>
 <p align="center">
-💰 Financeiro
+  <h3>💰 Financeiro</h3><br>
   <img src="imagens/fornoAfetoFinanceiro.png" width="800">
 </p>
+<br>
 ## ▶️ Como Executar
 
 ### 🪟 Windows
